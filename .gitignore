@@ -1,0 +1,9 @@
+.env
+nbproject/
+vendor/
+writable/cache/*
+writable/logs/*
+writable/session/*
+writable/uploads/*
+writable/debugbar/*
+!writable/**/index.html
