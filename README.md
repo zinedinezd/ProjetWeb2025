@@ -1,60 +1,63 @@
-# CodeIgniter 4 Framework
+# ProjetWeb2025 — Site de vente de produits Apple d'occasion
 
-## What is CodeIgniter?
+Application web de petites annonces permettant d'acheter et de vendre des produits Apple d'occasion (iPhone, iPad, Apple Watch…), développée en **PHP** avec le framework **CodeIgniter 4** (architecture MVC) et une base de données **MySQL**.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+Projet réalisé en 2025 dans le cadre de mon bachelier en informatique de gestion (ICC, Bruxelles).
 
-This repository holds the distributable version of the framework.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## Fonctionnalités
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+- **Catalogue** des annonces sur la page d'accueil, avec une page de détail pour chaque produit (prix, description)
+- **Inscription et connexion** des utilisateurs, avec mots de passe hachés (bcrypt) et gestion de session
+- **Espace « Mon compte »** pour l'utilisateur connecté
+- **Publication d'annonces** via un formulaire (catégorie, modèle, année, prix, description)
+- **Listes déroulantes dynamiques** : les modèles proposés s'adaptent à la catégorie choisie
+- **Pages dédiées** par gamme de produits (iPhone 14, iPhone 15, iPad Air, Apple Watch Ultra)
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+## Technologies
 
-## Important Change with index.php
+| Domaine | Outils |
+|---|---|
+| Back-end | PHP 8.2, CodeIgniter 4 (MVC) |
+| Base de données | MySQL / MariaDB, clés étrangères et suppression en cascade |
+| Front-end | HTML, CSS |
+| Environnement | XAMPP, phpMyAdmin, Git / GitHub |
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+## Structure de la base de données
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+- `personne` : utilisateurs (e-mail, mot de passe haché)
+- `produit` : annonces (catégorie, modèle, année), liées à un vendeur
+- `produit_detail` : prix et description de chaque annonce
+- `gamme` : catalogue des modèles par catégorie
 
-**Please** read the user guide for a better explanation of how CI4 works!
+## Installation (en local avec XAMPP)
 
-## Repository Management
+1. **Cloner le projet**
+   ```bash
+   git clone https://github.com/zinedinezd/ProjetWeb2025.git
+   cd ProjetWeb2025
+   ```
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+2. **Activer l'extension `intl`** de PHP : dans `C:\xampp\php\php.ini`, retirer le `;` devant `extension=intl`, puis redémarrer Apache.
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+3. **Créer la base de données** : dans phpMyAdmin, créer une base nommée `project2025` (interclassement `utf8mb4_general_ci`), puis importer le fichier `database/project2025.sql`.
 
-## Contributing
+4. **Vérifier la connexion** dans `app/Config/Database.php` (par défaut : utilisateur `root`, mot de passe vide, base `project2025`).
 
-We welcome contributions from the community.
+5. **Lancer le serveur** (MySQL doit être démarré dans XAMPP)
+   ```bash
+   php spark serve --port 8081
+   ```
+   Puis ouvrir http://localhost:8081
 
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/CONTRIBUTING.md) section in the development repository.
+## Compte de démonstration
 
-## Server Requirements
+| E-mail | Mot de passe |
+|---|---|
+| `demo@example.com` | `Demo1234!` |
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+La base de démonstration contient quelques annonces d'exemple pour tester le site directement.
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+## Auteur
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+**Zine-Dine Ben Merdes** — étudiant en informatique de gestion à Bruxelles
+GitHub : [@zinedinezd](https://github.com/zinedinezd)
